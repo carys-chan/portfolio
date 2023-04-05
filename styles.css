@@ -1,0 +1,39 @@
+h1 {
+    color: #4a0c2f;
+    font-style: normal;
+    font-size: 50px;
+    font-family: Walter Turncoat, cursive;
+    text-align:center;
+    /*text-shadow: 5px 5px 5px #e31b75;*/
+    }
+ 
+ h2 {
+    color:#630041;
+    font-size: 20px;
+    font-style: normal;
+    font-family: Open Sans Condensed;
+    text-align: justify;
+    }
+ 
+ h3 {
+    color:#350063;
+    font-size: 30px;
+    font-style: normal;
+    font-family: Walter Turncoat, cursive;
+    text-align: justify;
+    }
+ 
+ p {
+    color:#350063;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    font-family: Playfair Display, cursive;
+    text-align:left;
+    }
+ 
+ body { background:linear-gradient(to bottom, #ffcac2, #ffe2c2, #fffec2, #c2ffc8, #c2f4ff, #f1c2ff, #ffc2ed) }
+ 
+ body {
+    padding: 20px;
+ }
