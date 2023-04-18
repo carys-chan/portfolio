@@ -1,29 +1,6 @@
-h1 {
-    color: #4a0c2f;
-    font-style: normal;
-    font-size: 50px;
-    font-family: Walter Turncoat, cursive;
-    text-align:center;
-    /*text-shadow: 5px 5px 5px #e31b75;*/
-    }
- 
- h2 {
-    color:#630041;
-    font-size: 20px;
-    font-style: normal;
-    font-family: Open Sans Condensed;
-    text-align: justify;
-    }
- 
- h3 {
-    color:#350063;
-    font-size: 30px;
-    font-style: normal;
-    font-family: Walter Turncoat, cursive;
-    text-align: justify;
-    }
- 
- p {
+body {
+    background: linear-gradient(135deg, #ff99af, #ff99c5, #ff99db, #ff99f5, #f399ff, #e099ff, #ca99ff, #a899ff, #99b6ff, #99e0ff, #99f5ff);
+    padding: 20px;
     color:#350063;
     font-size: 20px;
     font-style: normal;
@@ -31,9 +8,40 @@ h1 {
     font-family: Playfair Display, cursive;
     text-align:left;
     }
- 
- body { background:linear-gradient(to bottom, #ffcac2, #ffe2c2, #fffec2, #c2ffc8, #c2f4ff, #f1c2ff, #ffc2ed) }
- 
- body {
-    padding: 20px;
- }
+
+h1 {
+    color: #4a0c2f;
+    font-style: normal;
+    font-size: 50px;
+    font-family: Tillana, cursive;
+    text-align:center;
+    }
+
+h2 {
+    color:#350063;
+    font-size: 30px;
+    font-style: normal;
+    font-family: Walter Turncoat, cursive;
+    text-align: justify;
+    } 
+
+ h3 {
+    color:#630041;
+    font-size: 25px;
+    font-style: normal;
+    font-family: Open Sans Condensed;
+    text-align: justify;
+    }
+
+div.menu{
+    list-style-type: none;
+    overflow: hidden;
+    text-align: center;
+    padding: 0;
+    }
+
+li#menu {
+    display: block;
+    text-decoration: none;
+    display: inline;
+}

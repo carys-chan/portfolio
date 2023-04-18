@@ -1,0 +1,186 @@
+<html>
+    <head>
+        <title>pokedex project</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Tillana&display=swap&family=Playfair+Display&display=swap&family=Atma:wght@300;400;500;600;700&family=Barlow:wght@300;400&family=Cherry+Swash:wght@400;700&family=Open+Sans+Condensed:wght@300;700&family=Satisfy&family=Source+Sans+Pro:wght@300;400&family=Walter+Turncoat&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <h1>pokedex project</h1>
+        <p>apparently all i can do is copy paste my python code in because html and css use python</p>
+        <p>but fret not i will find a way to make it work</p>
+        <p>(yes i know you are probably not fretting but you'll fret when you see the code it's 167 lines long)</p>
+        <p>---------------</p>
+        <h2>anyway here is my code</h2>
+        <div style="white-space: pre; font-family: monospace;">
+    #import tabulate module for pretty tables
+    !pip install tabulate
+    from tabulate import tabulate
+
+    !pip install hyperlink
+    import hyperlink
+
+    import csv
+
+    pokemons = []
+    #reads pokemon csv file and saves headers and pokemon in different lists
+    with open("Pokemon.csv") as p:
+    all_rows = csv.reader(p)
+    headers = next(all_rows)
+    for row in all_rows:
+        pokemons.append(row)
+
+    def menu():
+    """
+    this function displays all options in the menu
+    """
+    print()
+    print("-----------------------------")
+    print("welcome to the pokemon super search engine!!!")
+    print("1. display pokemon with their types and statistics")
+    print("2. display the first pokemon of a type of your choice")
+    print("3. display all pokemons with total base stat of your choice")
+    print("4. display all pokemons with a minimum set of stats")
+    print("5. display all lengendary pokemons of specific type1 and type2")
+    print("6. SURPRISE ME???")
+    print("0. quit")
+    print()
+
+    def display_pokemon(x):
+    """
+    this function displays a selected number of pokemon with their types and statistics
+    """
+    global display
+    display_pokemons = pokemons[0:x]
+    display += (display_pokemons) #add first x pokemons to display list
+    print(tabulate(display, headers = "firstrow"))
+
+    def type_pokemon(type):
+    """
+    this function displays first pokemon of a type specified by the user
+    """
+    #finding index of first occurance of matching type
+    i = 1
+    while type.title() != pokemons[i][2]:
+        i += 1
+    #add row of first applicable pokemon to global variable display (only contains headers)
+    global display
+    display.append(pokemons[i])
+    print(tabulate(display, headers = "firstrow"))
+    print()
+
+    def total_base_stat(stat):
+    """
+    this function displays all pokemon with a total base stat entered by user
+    """
+    global display
+    i = 1
+    while i < 800:
+        #compares 5th item in each pokemon's list to the stat entered
+        #if equal, pokemon list is appended to display list for output
+        if pokemons[i][4] == stat:
+        display.append(pokemons[i])
+        i += 1
+    if len(display) == 1: #only headers in the display list => no pokemon with specified base stat
+        print("no pokemon with this total base stat :(")
+    else:
+        print(tabulate(display, headers = "firstrow"))
+    print()
+
+    def min_specific_stat(a, d, s):
+    """
+    this function displays all pokemon with a minimum set of stats input by user
+    """
+    #the same as total_base_stat(), just using 3 and conditions
+    global display
+    i = 1
+    while i < 800:
+        if int(pokemons[i][8]) >= a and int(pokemons[i][9]) >= d and int(pokemons[i][10]) >= s:
+        display.append(pokemons[i])
+        i += 1
+    if len(display) == 1:
+        print("no pokemon has such powerful stats :O *shocked pikachu face*")
+    else:
+        print(tabulate(display, headers = "firstrow"))
+    print()
+
+    def legendary_types(x, y):
+    """
+    this function displays all lengedary pokemon that have the specified type1 and type2
+    """
+    i = 1
+    while i < 800:
+        #adds pokemon to display list if legendary == true and the types match user input
+        if pokemons[i][12] == "TRUE" and pokemons[i][2] == x.title() and pokemons[i][3] == y.title():
+        display.append(pokemons[i])
+        i += 1
+    if len(display) == 1:
+        print("no legendary pokemon with such types exists - perhaps you should create one :)")
+    else:
+        print(tabulate(display, headers = "firstrow"))
+    print()  
+
+    menu()
+    option = int(input("enter option: "))
+    while option != 0:
+    #ensuring user enters valid option
+    while option <0 or option > 6:
+        option = int(input("enter valid option: "))
+
+    display = [] #resets list to be displayed using tabulate function before next option is selected
+    display.append(headers) #add header row to display list
+
+    if option == 1:
+        number = int(input("how many pokemon do you want to display? (max 800 pokemon) "))
+        #ensuring valid number of pokemon is entered
+        while number < 0 or number > 800:
+        number = int(input("enter a valid number of pokemon (max 800 pokemon) "))
+        print()
+        display_pokemon(number)
+
+    elif option == 2:
+        #list of available types of pokemon to ensure user enters valid type
+        available_types = ["bug", "dark", "dragon", "electric", "fairy", "fighting", "fire", "ghost", "grass", "ground", "ice", "normal", "poison", "psychic", "rock", "steel", "water"]
+        #list is converted to string for contatenation in input()
+        available_types_str = ""
+        for t in available_types:
+        available_types_str += t + ", "
+        pokemon_type =  input("what type of pokemon do you want to display?\navailable types: " + available_types_str[:-2] + "\n")
+        while not pokemon_type.lower () in available_types:
+        pokemon_type = input("that is unfortunately not a type of pokemon. please enter a valid type: ")
+        print()
+        type_pokemon(pokemon_type)
+
+    elif option == 3:
+        stat = input("enter a total base stat: ")
+        while int(stat) < 0:
+        stat = input("enter a POSITIVE total base stat :) ")
+        print()
+        total_base_stat(stat)
+
+    elif option == 4:
+        attack = int(input("enter min special attack stat: "))
+        defence = int(input("enter min special defence stat: "))
+        speed = int(input("enter min speed stat: "))
+        print()
+        min_specific_stat(attack, defence, speed)
+
+    elif option == 5:
+        type1 = input("enter type1: ")
+        type2 = input("enter type2: ")
+        print()
+        legendary_types(type1, type2)
+
+    elif option == 6:
+        link = hyperlink.parse(u"https://sites.google.com/vjc.edu.sg/a-very-interesting-button-hmmm/home")
+        print("click on this extremely interesting link!!")
+        print(link.to_text())
+
+    menu()
+    option = int(input("enter option: "))
+
+    print("GOODBYE I HOPE YOU CATCH THEM ALL :D")
+            </div>
+        <p><br>are you fretting now? :)</p>
+    </body>
+</html>
