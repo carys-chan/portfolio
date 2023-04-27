@@ -44,4 +44,15 @@ li#menu {
     display: block;
     text-decoration: none;
     display: inline;
+    padding: 50px;
+}
+
+img {
+    pointer-events: none;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
